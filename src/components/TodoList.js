@@ -47,7 +47,7 @@ function TodoList() {
   return (
     <div>
       <Container>
-        <Grid container rowSpacing={1}>
+        <Grid container rowSpacing={3}>
           <Grid item xs={12}>
             <h1>
               <Typography variant="h4">What's the plan for today?</Typography>
@@ -61,7 +61,7 @@ function TodoList() {
                 borderRadius: "5px"
               }}
             >
-              <Grid container xs={12} rowSpacing={1}>
+              <Grid container xs={12} rowSpacing={2}>
                 <Grid item xs={12}>
                   <TodoForm onSubmit={addTodo} />
                 </Grid>

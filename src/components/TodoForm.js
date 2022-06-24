@@ -32,52 +32,60 @@ function TodoForm(props) {
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
       {props.edit ? (
-        <React.Fragment>
-          <TextField
-            id="outlined-basic"
-            label="Outlined"
-            variant="outlined"
-            size="small"
-            type="text"
-            placeholder="Update Item"
-            value={input}
-            name="text"
-            className="todo-input edit"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-
-          <Button
-            variant="contained"
-            className="todo-button"
-            onClick={handleSubmit}
-          >
-            Update
-          </Button>
-        </React.Fragment>
+        <Grid container rowSpacing={1}>
+          <Grid item xs={9}>
+            <TextField
+              fullWidth
+              id="outlined-basic"
+              label="Update item"
+              variant="outlined"
+              size="small"
+              type="text"
+              placeholder="Update Item"
+              value={input}
+              name="text"
+              className="todo-input edit"
+              onChange={handleChange}
+              ref={inputRef}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Button
+              variant="contained"
+              className="todo-button"
+              onClick={handleSubmit}
+            >
+              Update
+            </Button>
+          </Grid>
+        </Grid>
       ) : (
-        <React.Fragment>
-          <TextField
-            id="outlined-basic"
-            label="Add a todo"
-            variant="outlined"
-            size="small"
-            type="text"
-            value={input}
-            name="text"
-            className="todo-input"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-
-          <Button
-            variant="contained"
-            className="todo-button"
-            onClick={handleSubmit}
-          >
-            Add Item
-          </Button>
-        </React.Fragment>
+        <Grid container rowSpacing={1}>
+          <Grid item xs={9}>
+            <TextField
+              fullWidth
+              id="outlined-basic"
+              label="Add a todo"
+              variant="outlined"
+              size="small"
+              type="text"
+              value={input}
+              name="text"
+              className="todo-input"
+              onChange={handleChange}
+              ref={inputRef}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <Button
+              variant="contained"
+              className="todo-button"
+              onClick={handleSubmit}
+            >
+              Add Item
+            </Button>
+          </Grid>
+        </Grid>
       )}
     </form>
   );
