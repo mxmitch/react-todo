@@ -1,10 +1,30 @@
-import React, { useRef } from "react";
-import { Card, Form, Button, Container } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Card, Form, Button, Container, Alert } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (passwordRef.current.value !== passwordConfirmRef) {
+      return setError("Passwords do not match.");
+    }
+    try {
+      setError("");
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      setError("Failed to create and account");
+    }
+    setLoading(false);
+  }
 
   return (
     <Container>
@@ -12,7 +32,8 @@ export default function Signup() {
         <Card.Body>
           <div className="w-100 mt-2">
             <h2>Sign Up</h2>
-            <Form>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" ref={emailRef} required />
@@ -29,7 +50,7 @@ export default function Signup() {
                   required
                 />
               </Form.Group>
-              <Button type="submit" className="w-100">
+              <Button disabled={loading} type="submit" className="w-100">
                 Sign Up
               </Button>
             </Form>
